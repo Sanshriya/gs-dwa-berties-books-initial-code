@@ -25,7 +25,18 @@ router.get('/search-result', function (req, res) {
 
 router.get('/register', function (req,res) {
     res.render('register.ejs', shopData);                                                                     
-});        
+});   
+
+router.get('/list', function(req, res) {
+    let sqlquery = "SELECT * FROM books"; // query database to get all the books
+    // execute sql query
+    db.query(sqlquery, (err, result) => {
+        if (err) {
+            res.redirect('./'); 
+        }
+        res.send(result)
+     });
+});
 
 router.post('/registered', function (req,res) {
     // saving data in database
